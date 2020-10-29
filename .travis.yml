@@ -1,12 +1,10 @@
 language: java
 
-before_install:
-  – chmod +x ./gradlew build
-
 jdk:
   - oraclejdk11
 
 script:
+  - chmod +x ./gradlew build
   - sonar-scanner
 
 addons:
