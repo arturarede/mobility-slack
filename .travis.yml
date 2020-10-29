@@ -9,6 +9,10 @@ jdk:
 script:
   - sonar-scanner
 
+deploy:
+  provider: heroku
+  api_key: f544488b-9a79-460f-a9bf-ed3c348ff870
+
 addons:
   sonarcloud:
     organization: "arturarede"
