@@ -1,6 +1,7 @@
 plugins {
     id 'org.springframework.boot' version '2.3.3.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id "org.sonarqube" version "3.0"
     id 'java'
     id 'jacoco'
 }
@@ -28,8 +29,14 @@ test {
 jacocoTestReport {
     dependsOn test
     reports {
-        xml.enabled false
+        xml.enabled true
         csv.enabled false
         html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
     }
 }
