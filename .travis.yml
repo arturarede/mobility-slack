@@ -10,7 +10,7 @@ addons:
   sonarcloud:
     organization: "arturarede"
     token:
-      secure: "*********" # encrypted value of your token
+      secure: "7862c4747bbeeecd40a9e71062f590681d968007"
 script:
   # other script steps might be done before running the actual analysis
   - sonar-scanner
