@@ -5,3 +5,12 @@ before_install:
 
 jdk:
   - oraclejdk11
+
+addons:
+  sonarcloud:
+    organization: "arturarede"
+    token:
+      secure: "*********" # encrypted value of your token
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
