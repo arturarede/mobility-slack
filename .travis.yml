@@ -7,6 +7,7 @@ jdk:
   - oraclejdk11
 
 script:
+  - chmod +x gradlew test
   - sonar-scanner
 
 addons:
