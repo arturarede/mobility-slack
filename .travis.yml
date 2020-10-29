@@ -2,15 +2,15 @@ language: java
 
 before_install:
   – chmod +x gradlew
+  – chmod +x gradlew jacocoTestReport
 
 jdk:
   - oraclejdk11
+
+script:
+  - sonar-scanner
 
 addons:
   sonarcloud:
     organization: "arturarede"
     token: 5c67909bc9dac35fcaba891b436a874a91d2c122
-
-script:
-  - gradle build
-  - sonar-scanner
