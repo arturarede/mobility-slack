@@ -1,8 +1,7 @@
 language: java
 
 before_install:
-  – chmod +x gradlew
-  – chmod +x gradlew jacocoTestReport
+  – chmod +x gradlew test
 
 jdk:
   - oraclejdk11
