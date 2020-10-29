@@ -1,10 +1,12 @@
 language: java
 
+before_install:
+  – ./gradlew build
+
 jdk:
   - oraclejdk11
 
 script:
-  - gradlew build
   - sonar-scanner
 
 addons:
