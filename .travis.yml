@@ -5,11 +5,3 @@ before_install:
 
 jdk:
   - oraclejdk11
-
-addons:
-  sonarcloud:
-    organization: "arturarede"
-    token: 5c67909bc9dac35fcaba891b436a874a91d2c122
-
-script:
-  - sonar-scanner
