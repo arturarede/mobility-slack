@@ -1,8 +1,7 @@
-install: gradle wrapper --gradle-version 6.7
-
 language: java
 
 before_install:
+  - gradle wrapper --gradle-version 6.7
   – ./gradlew build
 
 jdk:
