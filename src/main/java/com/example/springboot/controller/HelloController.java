@@ -2,6 +2,7 @@ package com.example.springboot.controller;
 
 import com.example.springboot.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +18,11 @@ public class HelloController {
 	@GetMapping("/hello")
 	public ResponseEntity<?> getHellos() {
 		Set<String> result = helloService.getAll();
-		return ResponseEntity.ok().body(result);
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("my-header", "value");
+		return ResponseEntity.ok()
+				.headers(responseHeaders)
+				.body(result);
 	}
 
 	@PostMapping("/hello")
