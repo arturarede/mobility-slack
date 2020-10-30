@@ -6,7 +6,7 @@ before_install:
   – ./gradlew build
 
 jdk:
-  - oraclejdk11
+  - openjdk11
 
 script:
   - sonar-scanner
