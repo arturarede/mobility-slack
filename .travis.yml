@@ -9,14 +9,6 @@ jdk:
 script:
   - sonar-scanner
 
-deploy:
-  provider: heroku
-  api_key:
-    secure: "jBeWW3TL47p790r/bANVhAiTYr3Hvcvptn74SoXOviDDs5eikAZ/gHjRPLiEYyhRjAYYvOpeNSyFmN6wtnIKmvABahZtNdQShj3On6ghIS/87Ou3/C0fqxE5pcuOMrYt6SgRocFdAWKqj/ab/oNvZdTPmMIh8w0tGLTEKZ3Z2rpoJuACoBey2Gl5BoxYxhh/a5gKMfOCbZfFGmVJR2mObu5wOLXTMi2MWGy6S8HK+uZw9vJnAeHEM7wzKU7JQmehNZGDOgJ9ic/0bi4bMR7EDFo8qJB0H67flQ3D6rs5JEYi/6dPgMAA8WP2xRpOBLn9gzf34R05GOmfSc8gbruUZUQK6tRRq8vrEARBDE1xtwn+ExzO9MPagyPwG0C29odn2V3/hWqSgd8GHdWWSdWopFJldLHOGhbrh3SRRWvK/togc5PToujO9ciC7PCeMZt85c+KgXOb/tZKdcYoqWE4l+kgy0/FSrfONBx1vqKHMeshXn9k/JjbOXBTEDztPuAc/frYabuKDxyeWtx+bnkkhNJ9Owb7gD/bPTs8kto8QGfRhFfw5UeheA1qTBbsKH/C/0hyomCdzmdPonfww7lbnRGOVt1eWfggZpcqFJn3XdAkIK9HCNKXxG1O/eaJjvG9Hvub+ZJ7DCY1TjfxJTFj2pR11ygL0UXSknoPprYA2+8="
-  skip_cleanup: true
-  app: siemens_he
-  on: main
-
 addons:
   sonarcloud:
     organization: "arturarede"
