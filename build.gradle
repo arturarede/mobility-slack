@@ -85,26 +85,26 @@ asciidoctor {
 
 openapi3 {
     server = "http://localhost:8080"
-    title = "Siemens Api"
+    title = "Mobility Slack API"
     description = "API description"
     version = project.version
     format = "yaml"
 }
 
 swaggerSources {
-    siemens {
+    mobility {
         inputFile = file('build/api-spec/openapi3.yaml')
     }
 }
 
-generateSwaggerUISiemens.dependsOn "openapi3"
+generateSwaggerUIMobility.dependsOn "openapi3"
 
 bootJar {
     dependsOn 'generateSwaggerUI', 'asciidoctor'
     from ("${asciidoctor.outputDir}/html5") {
         into 'static/docs'
     }
-    from ("build/swagger-ui-siemens") {
+    from ("build/swagger-ui-mobility") {
         into 'static/docs/swagger-ui'
     }
 }
