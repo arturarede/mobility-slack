@@ -1,0 +1,57 @@
+= Hello Resource API =
+:docinfo: shared
+:doctype: article
+:toc: left
+:icons: font
+:source-highlighter: highlightjs
+:relfileprefix: ../
+:outfilesuffix: .html
+
+This is just a test
+
+== Get All Hellos
+This is the to get all hellos
+
+=== Definition
+[caption=]
+.General
+[width="100%", cols="h,1"]
+|===
+|Methods |GET
+|Authentication | None
+|Authorization | None.
+|Status Codes |
+200 - In case All goes well
+
+|===
+[caption="Path: "]
+//include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/path-parameters.adoc[]
+
+[caption=]
+.Request Parameters
+None.
+
+[caption=]
+.Header Parameters
+include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/request-headers.adoc[]
+
+[caption=]
+.Response Fields
+include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/response-fields.adoc[]
+
+=== Example calls
+
+==== Success call
+[source,bash,indent=0, role="primary"]
+.Curl call
+----
+include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/curl-request.adoc[]
+----
+
+[source,http,indent=0, role="secondary"]
+.HTTP response body
+----
+include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/http-response.adoc[]
+----
+
+

@@ -79,10 +79,12 @@ asciidoctor {
         from('src/docs/resources')
         into './'
     }
+    attributes 'revnumber' : version.toString(),
+                'webfonts': false
 }
 
 openapi3 {
-    server = "localhost:8080"
+    server = "http://localhost:8080"
     title = "Siemens Api"
     description = "API description"
     version = project.version
@@ -92,19 +94,23 @@ openapi3 {
 swaggerSources {
     siemens {
         inputFile = file('build/api-spec/openapi3.yaml')
-        code {
-            language = 'spring'
-        }
     }
 }
 
 generateSwaggerUISiemens.dependsOn "openapi3"
 
 bootJar {
-    dependsOn generateSwaggerUI, asciidoctor
+    dependsOn 'generateSwaggerUI', 'asciidoctor'
     from ("${asciidoctor.outputDir}/html5") {
         into 'static/docs'
     }
+    from ("${openapi3.outputDirectory}/") {
+        into 'static/docs/api'
+    }
+    from ("build/swagger-ui-siemens") {
+        into 'static/docs/swagger-ui'
+    }
+    archiveName = "app.jar"
 }
 
 jacocoTestReport {

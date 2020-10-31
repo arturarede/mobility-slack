@@ -12,7 +12,11 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor;
+import org.springframework.restdocs.operation.preprocess.OperationResponsePreprocessor;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.restdocs.restassured3.RestDocumentationFilter;
+import org.springframework.restdocs.snippet.Snippet;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -22,9 +26,11 @@ import java.util.Set;
 
 import static io.restassured.RestAssured.given;
 import static org.mockito.Mockito.when;
-import static org.springframework.restdocs.headers.HeaderDocumentation.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
-import static org.springframework.restdocs.restassured3.RestAssuredRestDocumentation.document;
+import static org.springframework.restdocs.headers.HeaderDocumentation.headerWithName;
+import static org.springframework.restdocs.headers.HeaderDocumentation.responseHeaders;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -40,6 +46,8 @@ public class HelloControllerTest {
 	@LocalServerPort
 	private int port;
 
+	protected static final String HOST = "localhost";
+
 	private String uri;
 
 	@PostConstruct
@@ -49,6 +57,28 @@ public class HelloControllerTest {
 
 	@Autowired
 	protected RequestSpecification documentationSpec;
+
+	protected OperationRequestPreprocessor modifyUrisPreprocessing() {
+		return preprocessRequest(
+				modifyUris()
+						.scheme("http")
+						.host(HOST)
+						.port(8080),
+				prettyPrint());
+	}
+
+	protected OperationResponsePreprocessor formatResponse() {
+		return preprocessResponse(
+				modifyUris()
+						.scheme("http")
+						.host(HOST)
+						.port(8080),
+				prettyPrint());
+	}
+
+	protected RestDocumentationFilter document(String name, Snippet... snippers){
+		return com.epages.restdocs.apispec.RestAssuredRestDocumentationWrapper.document(name, null, null, true, false, modifyUrisPreprocessing(), formatResponse(), snippers);
+	}
 
 	@Test
 	public void whenCallingHellosEndpoint_thenReturnAllHellos() {

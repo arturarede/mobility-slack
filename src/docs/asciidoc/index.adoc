@@ -1,0 +1,17 @@
+= Siemens API =
+:docinfo: shared
+:doctype: article
+:toc: left
+:icons: font
+:source-highlighter: highlightjs
+:relfileprefix: ../
+:outfilesuffix: .html
+
+Description for Siemans
+
+== Test API
+
+[width="100%, cols="2*2", options="header]
+|======
+|link:hello{outfilesuffix}[Hello Resource] |
+|======
