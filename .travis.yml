@@ -9,6 +9,9 @@ jdk:
 script:
   - sonar-scanner
 
+services:
+  - mongodb
+
 addons:
   sonarcloud:
     organization: "arturarede"
