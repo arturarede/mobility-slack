@@ -1,7 +1,7 @@
-package com.example.springboot.controller;
+package com.mobility.controller;
 
-import com.example.springboot.Application;
-import com.example.springboot.service.HelloService;
+import com.mobility.MobilitySlackApplication;
+import com.mobility.service.HelloService;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -35,7 +35,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.response
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureRestDocs
-@ContextConfiguration(classes = {Application.class})
+@ContextConfiguration(classes = {MobilitySlackApplication.class})
 public class HelloControllerTest {
 
 	private final String RESOURCE = "resource/";

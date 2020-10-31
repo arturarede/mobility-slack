@@ -1,6 +1,6 @@
-package com.example.springboot.controller;
+package com.mobility.controller;
 
-import com.example.springboot.service.HelloService;
+import com.mobility.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

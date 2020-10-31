@@ -1,4 +1,4 @@
-package com.example.springboot.service;
+package com.mobility.service;
 
 import org.springframework.stereotype.Service;
 
