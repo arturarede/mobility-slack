@@ -1,4 +1,4 @@
-= Siemens API =
+= Mobility Slack API =
 :docinfo: shared
 :doctype: article
 :toc: left
@@ -7,7 +7,7 @@
 :relfileprefix: ../
 :outfilesuffix: .html
 
-Description for Siemans
+Description for Mobility Slack
 
 == Test API
 

@@ -4,13 +4,13 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=arturarede_app&metric=coverage&token=267804389ef4cfe664784c6569c143ed33ef3ef2)](https://sonarcloud.io/dashboard?id=arturarede_app)
 
 # Mobility Slack
-🚉 Information form the Portuguese transportation APIs
+🚉 Information from the Portuguese transportation APIs
 
 ## Included APIs
 At the moment we support 3 APIs:
 
 - [Comboios Portugal](https://www.infraestruturasdeportugal.pt/)
-- [Metro de Lisboa](https://api.metrolisboa.pt/store/apis/info?name=EstadoServicoML&version=1.0.1&provider=admin)
+- [Metro de Lisboa](https://api.metrolisboa.pt/store/)
 - [EMEL](https://emel.city-platform.com/opendata/)
 
 ## Documentation
