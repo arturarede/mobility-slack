@@ -4,7 +4,7 @@
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=arturarede_app&metric=coverage&token=267804389ef4cfe664784c6569c143ed33ef3ef2)](https://sonarcloud.io/dashboard?id=arturarede_app)
 
 # Mobility Slack
-🚉 Information from the Portuguese transportation APIs
+🚉 Portuguese transportation API
 
 ## Included APIs
 At the moment we support 3 APIs:
