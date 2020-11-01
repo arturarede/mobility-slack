@@ -22,8 +22,14 @@ public class StationController {
         return CollectionModel.of(stations);
     }
 
-    @GetMapping("/{name}")
-    public EntityModel<Station> getStationByName(@PathVariable("name") String name) {
+    @GetMapping("/{id}")
+    public EntityModel<Station> getStationById(@PathVariable("id") Integer id) {
+        Station station = stationService.getStationById(id);
+        return EntityModel.of(station);
+    }
+
+    @GetMapping()
+    public EntityModel<Station> getStationByName(@RequestParam("name") String name) {
         Station station = stationService.getStationByName(name);
         return EntityModel.of(station);
     }

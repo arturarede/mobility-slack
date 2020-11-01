@@ -7,5 +7,7 @@ import java.util.Optional;
 
 public interface StationRepository extends MongoRepository<Station, String> {
 
+    Optional<Station> findById(Integer id);
+
     Optional<Station> findByNameIgnoreCase(String name);
 }

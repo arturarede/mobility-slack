@@ -18,6 +18,11 @@ public class StationService {
         return stationRepository.findAll();
     }
 
+    public Station getStationById(Integer id) {
+        return stationRepository.findById(id)
+                .orElseThrow(() -> new MobilityNotFoundException("The station id " + id + " does not exist"));
+    }
+
     public Station getStationByName(String name) {
         return stationRepository.findByNameIgnoreCase(name)
                 .orElseThrow(() -> new MobilityNotFoundException("The station name " + name + " does not exist"));
