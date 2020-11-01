@@ -1,5 +1,6 @@
 package com.mobility.controller;
 
+import com.mobility.repository.StationRepository;
 import com.mobility.service.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -14,6 +15,9 @@ public class HelloController {
 
 	@Autowired
 	HelloService helloService;
+
+	@Autowired
+	StationRepository stationRepository;
 
 	@GetMapping("/hello")
 	public ResponseEntity<?> getHellos() {
