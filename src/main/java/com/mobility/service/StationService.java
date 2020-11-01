@@ -1,12 +1,12 @@
 package com.mobility.service;
 
-import com.mobility.service.exceptions.MobilityNotFoundException;
 import com.mobility.model.entity.Station;
 import com.mobility.repository.StationRepository;
+import com.mobility.service.exceptions.MobilityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class StationService {
@@ -14,8 +14,8 @@ public class StationService {
     @Autowired
     StationRepository stationRepository;
 
-    public List<Station> listStations() {
-        return stationRepository.findAll();
+    public Page<Station> listStations(Pageable page) {
+        return stationRepository.findAll(page);
     }
 
     public Station getStationById(Integer id) {
