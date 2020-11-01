@@ -1,6 +1,6 @@
 package com.mobility.service;
 
-import com.mobility.controller.exceptions.MobilityNotFoundException;
+import com.mobility.service.exceptions.MobilityNotFoundException;
 import com.mobility.model.entity.Station;
 import com.mobility.repository.StationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
