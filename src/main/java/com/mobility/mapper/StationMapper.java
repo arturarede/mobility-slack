@@ -10,7 +10,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface StationMapper {
 
-
     @Mapping(source = "id", target = "stationId")
     @Mapping(source = "name", target = "stationName")
     @Mapping(target = "stationType", ignore = true)
