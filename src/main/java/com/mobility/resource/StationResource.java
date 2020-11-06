@@ -58,8 +58,10 @@ public class StationResource {
         Station station = stationService.getStationById(id);
         StationDto stationDto = stationMapper.stationToStationDTO(station);
         EntityModel<StationDto> stationDtoEntityModel = EntityModel.of(stationDto);
+        stationDtoEntityModel.add(linkTo(StationResource.class).slash(station.getId()).withSelfRel());
         stationDtoEntityModel.add(linkTo(methodOn(StationResource.class).listStations(null, null,
                 0, 10)).withRel("stations"));
         return stationDtoEntityModel;
     }
+
 }
