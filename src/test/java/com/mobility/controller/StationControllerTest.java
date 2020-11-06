@@ -4,6 +4,7 @@ import com.mobility.configuration.AbstractTestConfiguration;
 import com.mobility.helpers.StationBuilder;
 import com.mobility.model.entity.Station;
 import com.mobility.repository.StationRepository;
+import com.mobility.service.exceptions.MobilityNotFoundException;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -24,7 +25,7 @@ public class StationControllerTest extends AbstractTestConfiguration {
 	private StationRepository stationRepository;
 
 	@Test
-	public void whenCallingStationByIdEndpoint_thenReturnStation() {
+	public void whenCallingStationById_thenReturnStation() {
 		// given
 		Station station = StationBuilder
 				.aStation()
@@ -34,7 +35,7 @@ public class StationControllerTest extends AbstractTestConfiguration {
 
 		// when
 		Response response = given(documentationSpec)
-				.filter(document(RESOURCE + "whenCallingHellosEndpoint_thenReturnAllHellos",
+				.filter(document(RESOURCE + "whenCallingStationByIdEndpoint_thenReturnStation",
 						responseFields(
 								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("test"),
 								fieldWithPath("stationName").type(JsonFieldType.STRING).description("test")
@@ -42,7 +43,8 @@ public class StationControllerTest extends AbstractTestConfiguration {
 				))
 				.when()
 				.port(port)
-				.get("/stations/{id}", station.getId());
+				.pathParam("id", station.getId())
+				.get("/stations/{id}");
 
 
 		// then
@@ -50,9 +52,46 @@ public class StationControllerTest extends AbstractTestConfiguration {
 	}
 
 	@Test
-	public void givenHelloId_whenMakingGetRequestToHelloEndpoint_thenReturnHello() {}
+	public void givenStationIdDoesNotExist_whenCallingStationByIdEndpoint_thenReturnNotFoundException() {
+		// given
+		Station station = StationBuilder
+				.aStation()
+				.build();
+
+		when(stationRepository.findById(station.getId())).thenThrow(MobilityNotFoundException.class);
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "givenStationIdDoesNotExist_whenCallingStationByIdEndpoint_" +
+						"thenReturnNotFoundException"))
+				.when()
+				.port(port)
+				.pathParam("id", station.getId())
+				.get("/stations/{id}");
+
+
+		// then
+		response.then()
+				.statusCode(404);
+	}
 
 	@Test
-	public void givenMovie_whenMakingPostRequestToMovieEndpoint_thenCorrect() { }
+	public void givenStationIdNotNumber_whenCallingStationByIdEndpoint_thenReturnBadRequestException() {
+		// given
+		String id = "I'm a String";
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "givenStationIdNotNumber_whenCallingStationByIdEndpoint_" +
+						"thenReturnBadRequestException"))
+				.when()
+				.port(port)
+				.pathParam("id", id)
+				.get("/stations/{id}");
+
+
+		// then
+		response.then()
+				.statusCode(400);
+	}
 
 }

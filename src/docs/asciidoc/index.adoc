@@ -13,5 +13,5 @@ Description for Mobility Slack
 
 [width="100%, cols="2*2", options="header]
 |======
-|link:hello{outfilesuffix}[Hello Resource] |
+|link:station{outfilesuffix}[Station Resource] |
 |======

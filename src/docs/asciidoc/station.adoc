@@ -1,0 +1,111 @@
+= Station Resource API =
+:docinfo: shared
+:doctype: article
+:toc: left
+:icons: font
+:source-highlighter: highlightjs
+:relfileprefix: ../
+:outfilesuffix: .html
+
+The Station Resource is where you can get all the stations information to later use in other requests.
+
+== Get All Stations
+
+=== Definition
+[caption=]
+.General
+[width="100%", cols="h,1"]
+|===
+|Methods |GET
+|Authentication | None
+|Authorization | None.
+|Status Codes |
+200 - In case all goes well you get all the stations
+
+|===
+[caption=]
+.Request Parameters
+None.
+
+[caption=]
+.Header Parameters
+None.
+
+[caption=]
+.Response Fields
+include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/response-fields.adoc[]
+
+=== Example calls
+
+==== Success call
+[source,bash,indent=0, role="primary"]
+.Curl call
+----
+include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/curl-request.adoc[]
+----
+
+[source,http,indent=0, role="secondary"]
+.HTTP response body
+----
+include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/http-response.adoc[]
+----
+
+
+== Get Station By Id
+
+=== Definition
+[caption=]
+.General
+[width="100%", cols="h,1"]
+|===
+|Methods |GET
+|Authentication | None
+|Authorization | None.
+|Status Codes |
+200 - In case all goes well you get a station
+
+400 - In case the request contains an invalid id
+
+404 - In case the station does not exist
+
+|===
+
+[caption=]
+.Request Parameters
+None.
+
+[caption=]
+.Header Parameters
+None.
+
+[caption=]
+.Response Fields
+include::{snippets}/resource/whenCallingStationByIdEndpoint_thenReturnStation/response-fields.adoc[]
+
+=== Example calls
+
+==== Success call
+[source,bash,indent=0, role="primary"]
+.Curl call
+----
+include::{snippets}/resource/whenCallingStationByIdEndpoint_thenReturnStation/curl-request.adoc[]
+----
+
+[source,http,indent=0, role="secondary"]
+.HTTP response body
+----
+include::{snippets}/resource/whenCallingStationByIdEndpoint_thenReturnStation/http-response.adoc[]
+----
+
+==== Invalid Id
+[source,bash,indent=0, role="primary"]
+.Curl call
+----
+include::{snippets}/resource/givenStationIdDoesNotExist_whenCallingStationByIdEndpoint_thenReturnMobilityNotFoundException/curl-request.adoc[]
+----
+
+[source,http,indent=0, role="secondary"]
+.HTTP response body
+----
+include::{snippets}/resource/givenStationIdDoesNotExist_whenCallingStationByIdEndpoint_thenReturnMobilityNotFoundException/http-response.adoc[]
+----
