@@ -1,4 +1,4 @@
-package com.mobility.controller;
+package com.mobility.resource;
 
 import com.mobility.configuration.AbstractTestConfiguration;
 import com.mobility.helpers.StationBuilder;
@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 
-public class StationControllerTest extends AbstractTestConfiguration {
+public class StationResourceTest extends AbstractTestConfiguration {
 
 	private final String RESOURCE = "resource/";
 
@@ -27,7 +27,7 @@ public class StationControllerTest extends AbstractTestConfiguration {
 	public void whenCallingStationById_thenReturnStation() {
 		// given
 		Station station = StationBuilder
-				.aStation()
+				.aMetroStation()
 				.build();
 
 		when(stationRepository.findById(station.getId())).thenReturn(Optional.of(station));
@@ -38,6 +38,7 @@ public class StationControllerTest extends AbstractTestConfiguration {
 						responseFields(
 								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("The Station id."),
 								fieldWithPath("stationName").type(JsonFieldType.STRING).description("The Station name."),
+								fieldWithPath("stationType").type(JsonFieldType.STRING).description("The Station type, it can be \"CP (Comboios de Portugal)\" or \"Metro\"."),
 								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
 										"in HAL Format. Delivering every possible next action a client may perform.")
 						)

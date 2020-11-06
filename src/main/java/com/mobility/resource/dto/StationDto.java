@@ -1,8 +1,7 @@
-package com.mobility.controller.dto;
+package com.mobility.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mobility.model.entity.StationType;
 import lombok.Data;
 
 @Data
@@ -12,5 +11,5 @@ public class StationDto {
 
     private Integer stationId;
     private String stationName;
-    private StationType stationType;
+    private String stationType;
 }

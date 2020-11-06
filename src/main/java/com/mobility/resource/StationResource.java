@@ -1,6 +1,6 @@
-package com.mobility.controller;
+package com.mobility.resource;
 
-import com.mobility.controller.dto.StationDto;
+import com.mobility.resource.dto.StationDto;
 import com.mobility.mapper.StationMapper;
 import com.mobility.model.entity.Station;
 import com.mobility.service.StationService;
@@ -21,7 +21,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/stations")
-public class StationController {
+public class StationResource {
 
     @Autowired
     StationService stationService;
@@ -31,6 +31,7 @@ public class StationController {
 
     @GetMapping(path = "")
     public ResponseEntity<Map<String, Object>> listStations(@RequestParam(required = false) String name,
+                                                            @RequestParam(required = false) String type,
                                                             @RequestParam(defaultValue = "0") int page,
                                                             @RequestParam(defaultValue = "10") int size) {
         // @TODO fix this code
@@ -57,7 +58,8 @@ public class StationController {
         Station station = stationService.getStationById(id);
         StationDto stationDto = stationMapper.stationToStationDTO(station);
         EntityModel<StationDto> stationDtoEntityModel = EntityModel.of(stationDto);
-        stationDtoEntityModel.add(linkTo(methodOn(StationController.class).listStations(null, 0, 10)).withRel("stations"));
+        stationDtoEntityModel.add(linkTo(methodOn(StationResource.class).listStations(null, null,
+                0, 10)).withRel("stations"));
         return stationDtoEntityModel;
     }
 }
