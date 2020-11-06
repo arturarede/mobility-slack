@@ -14,8 +14,7 @@ import java.util.Optional;
 
 import static io.restassured.RestAssured.given;
 import static org.mockito.Mockito.when;
-import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
-import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 
 public class StationControllerTest extends AbstractTestConfiguration {
 
@@ -37,8 +36,10 @@ public class StationControllerTest extends AbstractTestConfiguration {
 		Response response = given(documentationSpec)
 				.filter(document(RESOURCE + "whenCallingStationByIdEndpoint_thenReturnStation",
 						responseFields(
-								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("test"),
-								fieldWithPath("stationName").type(JsonFieldType.STRING).description("test")
+								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("The Station id."),
+								fieldWithPath("stationName").type(JsonFieldType.STRING).description("The Station name."),
+								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
+										"in HAL Format. Delivering every possible next action a client may perform.")
 						)
 				))
 				.when()

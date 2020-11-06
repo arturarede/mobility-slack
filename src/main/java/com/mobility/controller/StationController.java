@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @RestController
 @RequestMapping("/stations")
 public class StationController {
@@ -26,7 +29,7 @@ public class StationController {
     @Autowired
     StationMapper stationMapper;
 
-    @GetMapping("")
+    @GetMapping(path = "")
     public ResponseEntity<Map<String, Object>> listStations(@RequestParam(required = false) String name,
                                                             @RequestParam(defaultValue = "0") int page,
                                                             @RequestParam(defaultValue = "10") int size) {
@@ -49,10 +52,12 @@ public class StationController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "/{id}")
     public EntityModel<StationDto> getStationById(@PathVariable("id") Integer id) {
         Station station = stationService.getStationById(id);
         StationDto stationDto = stationMapper.stationToStationDTO(station);
-        return EntityModel.of(stationDto);
+        EntityModel<StationDto> stationDtoEntityModel = EntityModel.of(stationDto);
+        stationDtoEntityModel.add(linkTo(methodOn(StationController.class).listStations(null, 0, 10)).withRel("stations"));
+        return stationDtoEntityModel;
     }
 }

@@ -7,10 +7,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class MobilitySystemException extends MobilityException {
     private static final long serialVersionUID = 1L;
 
-    public MobilitySystemException(final String message, final Exception e) {
-        super(message, e);
-    }
-
     public MobilitySystemException(final String message) {
         super(message);
     }
