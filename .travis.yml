@@ -9,6 +9,9 @@ jdk:
 script:
   - sonar-scanner
 
+git:
+  depth: false
+
 services:
   - mongodb
 
