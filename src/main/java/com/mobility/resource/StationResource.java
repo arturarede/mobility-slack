@@ -14,9 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -27,10 +25,10 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class StationResource {
 
     @Autowired
-    StationService stationService;
+    private StationService stationService;
 
     @Autowired
-    StationMapper stationMapper;
+    private StationMapper stationMapper;
 
     @GetMapping(path = "")
     public ResponseEntity<Map<String, Object>> listStations(@RequestParam(required = false) String name,
@@ -40,12 +38,12 @@ public class StationResource {
 
         Map<String, Object> response = new LinkedHashMap<>();
         if(name != null) {
-            Station station = stationService.getStationByName(name);
-            EntityModel<StationDto> stationDto = createStationDtoEntityModel(station);
-            response.put("stations", stationDto);
+            Optional<Station> station = stationService.getStationByName(name, type);
+            EntityModel<StationDto> stationDto = createStationDtoEntityModel(station.get());
+            response.put("stations", Collections.singletonList(stationDto));
         } else {
             Pageable paging = PageRequest.of(page, size);
-            Page<Station> stations = stationService.listStations(paging);
+            Page<Station> stations = stationService.listStations(paging, type);
             List<EntityModel<StationDto>> stationsDto = stations.getContent().stream()
                     .map(this::createStationDtoEntityModel)
                     .collect(Collectors.toList());
