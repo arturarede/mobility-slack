@@ -18,7 +18,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 
 public class StationResourceTest extends AbstractTestConfiguration {
 
-	private final String RESOURCE = "resource/";
+	private final String RESOURCE = "station/";
 
 	@MockBean
 	private StationRepository stationRepository;
@@ -94,6 +94,36 @@ public class StationResourceTest extends AbstractTestConfiguration {
 		// then
 		response.then()
 				.statusCode(400);
+	}
+
+	@Test
+	public void whenListAllStations_thenReturnPaginatedStations() {
+		// given
+		Station station = StationBuilder
+				.aMetroStation()
+				.build();
+
+		when(stationRepository.findById(station.getId())).thenReturn(Optional.of(station));
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "whenCallingStationByIdEndpoint_thenReturnStation",
+						responseFields(
+								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("The Station id."),
+								fieldWithPath("stationName").type(JsonFieldType.STRING).description("The Station name."),
+								fieldWithPath("stationType").type(JsonFieldType.STRING).description("The Station type, it can be \"CP (Comboios de Portugal)\" or \"Metro\"."),
+								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
+										"in HAL Format. Delivering every possible next action a client may perform.")
+						)
+				))
+				.when()
+				.port(port)
+				.pathParam("id", station.getId())
+				.get("/stations/{id}");
+
+
+		// then
+		response.then().statusCode(200);
 	}
 
 }
