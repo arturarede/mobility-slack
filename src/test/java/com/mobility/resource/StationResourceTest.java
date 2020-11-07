@@ -42,12 +42,12 @@ public class StationResourceTest extends AbstractTestConfiguration {
 
 		// when
 		Response response = given(documentationSpec)
-				.filter(document(RESOURCE + "whenCallingStationByIdEndpoint_thenReturnStation",
+				.filter(document(RESOURCE + "whenCallingStationById_thenReturnStation",
 						responseFields(
 								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("The Station id."),
 								fieldWithPath("stationName").type(JsonFieldType.STRING).description("The Station name."),
 								fieldWithPath("stationType").type(JsonFieldType.STRING).description("The Station type, it can be \"CP (Comboios de Portugal)\" or \"Metro\"."),
-								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
+								fieldWithPath("_links.self.href").type(JsonFieldType.STRING).description("HATEOAS Links " +
 										"in HAL Format. Delivering every possible next action a client may perform.")
 						),
 						links(
@@ -65,7 +65,7 @@ public class StationResourceTest extends AbstractTestConfiguration {
 	}
 
 	@Test
-	public void givenStationIdDoesNotExist_whenCallingStationByIdEndpoint_thenReturnNotFoundException() {
+	public void givenStationIdDoesNotExist_whenCallingStationById_thenReturnNotFoundException() {
 		// given
 		Station station = StationBuilder
 				.aStation()
@@ -75,8 +75,7 @@ public class StationResourceTest extends AbstractTestConfiguration {
 
 		// when
 		Response response = given(documentationSpec)
-				.filter(document(RESOURCE + "givenStationIdDoesNotExist_whenCallingStationByIdEndpoint_" +
-						"thenReturnNotFoundException"))
+				.filter(document(RESOURCE + "givenStationIdDoesNotExist_whenCallingStationById_thenReturnNotFoundException"))
 				.when()
 				.port(port)
 				.pathParam("id", station.getId())
@@ -89,13 +88,12 @@ public class StationResourceTest extends AbstractTestConfiguration {
 	}
 
 	@Test
-	public void givenStationIdNotNumber_whenCallingStationByIdEndpoint_thenReturnBadRequestException() {
+	public void givenStationIdNotNumber_whenCallingStationById_thenReturnBadRequestException() {
 		// given
 		String id = "I'm a String";
 		// when
 		Response response = given(documentationSpec)
-				.filter(document(RESOURCE + "givenStationIdNotNumber_whenCallingStationByIdEndpoint_" +
-						"thenReturnBadRequestException"))
+				.filter(document(RESOURCE + "givenStationIdNotNumber_whenCallingStationById_thenReturnBadRequestException"))
 				.when()
 				.port(port)
 				.pathParam("id", id)
@@ -252,12 +250,12 @@ public class StationResourceTest extends AbstractTestConfiguration {
 
 		// when
 		Response response = given(documentationSpec)
-				.filter(document(RESOURCE + "whenListStationsWithName_thenReturnPaginatedStations",
+				.filter(document(RESOURCE + "whenListStationsWithName_thenReturnStation",
 						responseFields(
 								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("The Station id."),
 								fieldWithPath("stationName").type(JsonFieldType.STRING).description("The Station name."),
 								fieldWithPath("stationType").type(JsonFieldType.STRING).description("The Station type, it can be \"CP (Comboios de Portugal)\" or \"Metro\"."),
-								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
+								fieldWithPath("_links.self.href").type(JsonFieldType.STRING).description("HATEOAS Links " +
 										"in HAL Format. Delivering every possible next action a client may perform.")
 						),
 						links(

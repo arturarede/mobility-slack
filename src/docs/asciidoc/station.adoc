@@ -33,7 +33,7 @@ None.
 
 [caption=]
 .Response Fields
-include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/response-fields.adoc[]
+include::{snippets}/stations/whenListAllCpStations_thenReturnPaginatedStations/response-fields.adoc[]
 
 === Example calls
 
@@ -41,13 +41,13 @@ include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/respo
 [source,bash,indent=0, role="primary"]
 .Curl call
 ----
-include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/curl-request.adoc[]
+include::{snippets}/stations/whenListAllCpStations_thenReturnPaginatedStations/curl-request.adoc[]
 ----
 
 [source,http,indent=0, role="secondary"]
 .HTTP response body
 ----
-include::{snippets}/resource/whenCallingHellosEndpoint_thenReturnAllHellos/http-response.adoc[]
+include::{snippets}/stations/whenListAllCpStations_thenReturnPaginatedStations/http-response.adoc[]
 ----
 
 
@@ -80,7 +80,7 @@ None.
 
 [caption=]
 .Response Fields
-include::{snippets}/resource/whenCallingStationByIdEndpoint_thenReturnStation/response-fields.adoc[]
+include::{snippets}/stations/whenCallingStationById_thenReturnStation/response-fields.adoc[]
 
 === Example calls
 
@@ -88,24 +88,24 @@ include::{snippets}/resource/whenCallingStationByIdEndpoint_thenReturnStation/re
 [source,bash,indent=0, role="primary"]
 .Curl call
 ----
-include::{snippets}/resource/whenCallingStationByIdEndpoint_thenReturnStation/curl-request.adoc[]
+include::{snippets}/stations/whenCallingStationById_thenReturnStation/curl-request.adoc[]
 ----
 
 [source,http,indent=0, role="secondary"]
 .HTTP response body
 ----
-include::{snippets}/resource/whenCallingStationByIdEndpoint_thenReturnStation/http-response.adoc[]
+include::{snippets}/stations/whenCallingStationById_thenReturnStation/http-response.adoc[]
 ----
 
 ==== Invalid Id
 [source,bash,indent=0, role="primary"]
 .Curl call
 ----
-include::{snippets}/resource/givenStationIdDoesNotExist_whenCallingStationByIdEndpoint_thenReturnMobilityNotFoundException/curl-request.adoc[]
+include::{snippets}/stations/givenStationIdDoesNotExist_whenCallingStationById_thenReturnNotFoundException/curl-request.adoc[]
 ----
 
 [source,http,indent=0, role="secondary"]
 .HTTP response body
 ----
-include::{snippets}/resource/givenStationIdDoesNotExist_whenCallingStationByIdEndpoint_thenReturnMobilityNotFoundException/http-response.adoc[]
+include::{snippets}/stations/givenStationIdDoesNotExist_whenCallingStationById_thenReturnNotFoundException/http-response.adoc[]
 ----
