@@ -357,15 +357,6 @@ public class StationResourceTest extends AbstractTestConfiguration {
 
 		// when
 		Response response = given(documentationSpec)
-				.filter(document(RESOURCE + "whenListMetroStationsWithName_thenReturnLink",
-						responseFields(
-								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
-										"in HAL Format. Delivering every possible next action a client may perform.")
-						),
-						links(
-								linkWithRel("self").description("Reference to self.")
-						)
-				))
 				.when()
 				.port(port)
 				.queryParam("name", name)
@@ -437,15 +428,6 @@ public class StationResourceTest extends AbstractTestConfiguration {
 
 		// when
 		Response response = given(documentationSpec)
-				.filter(document(RESOURCE + "whenListCpStationsWithName_thenReturnLink",
-						responseFields(
-								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
-										"in HAL Format. Delivering every possible next action a client may perform.")
-						),
-						links(
-								linkWithRel("self").description("Reference to self.")
-						)
-				))
 				.when()
 				.port(port)
 				.queryParam("name", name)
