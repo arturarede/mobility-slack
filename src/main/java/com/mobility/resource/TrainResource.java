@@ -16,6 +16,6 @@ public class TrainResource {
 
     @GetMapping(path = "")
     public String listTrains(@PathVariable("station-id") Integer stationId) {
-        return trainService.testConnection(stationId);
+        return trainService.listTrains(stationId);
     }
 }

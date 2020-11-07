@@ -14,7 +14,7 @@ public class TrainService {
     @Autowired
     StationService stationService;
 
-    public String testConnection(Integer stationId) {
+    public String listTrains(Integer stationId) {
         Station station = stationService.getStationById(stationId);
         return ipBaseUrl+station.getIpId();
     }
