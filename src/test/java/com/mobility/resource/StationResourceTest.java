@@ -3,6 +3,7 @@ package com.mobility.resource;
 import com.mobility.configuration.AbstractTestConfiguration;
 import com.mobility.helpers.StationBuilder;
 import com.mobility.model.entity.Station;
+import com.mobility.model.entity.StationType;
 import com.mobility.repository.StationRepository;
 import com.mobility.service.exceptions.MobilityNotFoundException;
 import io.restassured.response.Response;
@@ -25,7 +26,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 
 public class StationResourceTest extends AbstractTestConfiguration {
 
-	private final String RESOURCE = "station/";
+	private final String RESOURCE = "stations/";
 
 	@MockBean
 	private StationRepository stationRepository;
@@ -147,6 +148,155 @@ public class StationResourceTest extends AbstractTestConfiguration {
 		response.then().statusCode(200);
 	}
 
+	@Test
+	public void whenListAllCpStations_thenReturnPaginatedStations() {
+		// given
+		int pageNr = 0;
+		int size = 10;
+		Pageable pageable = PageRequest.of(pageNr, size);
 
+		String type = StationType.CP.name();
+
+		Station stationCpOne = StationBuilder
+				.aCpStation().but()
+				.withId(1)
+				.build();
+
+		Station stationCpTwo = StationBuilder
+				.aCpStation().but()
+				.withId(2)
+				.build();
+
+		Page<Station> page = new PageImpl<>(List.of(stationCpOne, stationCpTwo));
+		when(stationRepository.findAllByIpIdNotNull(pageable)).thenReturn(page);
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "whenListAllCpStations_thenReturnPaginatedStations",
+						responseFields(
+								fieldWithPath("_embedded.stations[].stationId").type(JsonFieldType.NUMBER).description("The Station id."),
+								fieldWithPath("_embedded.stations[].stationName").type(JsonFieldType.STRING).description("The Station name."),
+								fieldWithPath("_embedded.stations[].stationType").type(JsonFieldType.STRING).description("The Station type, it can be \"CP (Comboios de Portugal)\" or \"Metro\"."),
+								subsectionWithPath("_embedded.stations[]._links").type(JsonFieldType.OBJECT).description("Self Link to a station"),
+								subsectionWithPath("._links").type(JsonFieldType.OBJECT).description("Link to list stations"),
+								subsectionWithPath("page").type(JsonFieldType.OBJECT).description("Paging information")
+						)
+				))
+				.when()
+				.port(port)
+				.queryParam("type", type)
+				.get("/stations/");
+
+
+		// then
+		response.then().statusCode(200);
+	}
+
+	@Test
+	public void whenListAllMetroStations_thenReturnPaginatedStations() {
+		// given
+		int pageNr = 0;
+		int size = 10;
+		Pageable pageable = PageRequest.of(pageNr, size);
+
+		String type = StationType.METRO.name();
+
+		Station stationMetroOne = StationBuilder
+				.aMetroStation().but()
+				.withId(1)
+				.build();
+
+		Station stationMetroTwo = StationBuilder
+				.aMetroStation().but()
+				.withId(2)
+				.build();
+
+		Page<Station> page = new PageImpl<>(List.of(stationMetroOne, stationMetroTwo));
+		when(stationRepository.findAllByMetroIdNotNull(pageable)).thenReturn(page);
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "whenListAllMetroStations_thenReturnPaginatedStations",
+						responseFields(
+								fieldWithPath("_embedded.stations[].stationId").type(JsonFieldType.NUMBER).description("The Station id."),
+								fieldWithPath("_embedded.stations[].stationName").type(JsonFieldType.STRING).description("The Station name."),
+								fieldWithPath("_embedded.stations[].stationType").type(JsonFieldType.STRING).description("The Station type, it can be \"CP (Comboios de Portugal)\" or \"Metro\"."),
+								subsectionWithPath("_embedded.stations[]._links").type(JsonFieldType.OBJECT).description("Self Link to a station"),
+								subsectionWithPath("._links").type(JsonFieldType.OBJECT).description("Link to list stations"),
+								subsectionWithPath("page").type(JsonFieldType.OBJECT).description("Paging information")
+						)
+				))
+				.when()
+				.port(port)
+				.queryParam("type", type)
+				.get("/stations/");
+
+
+		// then
+		response.then().statusCode(200);
+	}
+
+	@Test
+	public void whenListStationsWithName_thenReturnStation() {
+		// given
+		String name = "stationMetro";
+
+		Station stationMetro = StationBuilder
+				.aMetroStation().but()
+				.withId(1)
+				.withName(name)
+				.build();
+
+		Optional<Station> optStation = Optional.of(stationMetro);
+		when(stationRepository.findByNameIgnoreCase(name)).thenReturn(optStation);
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "whenListStationsWithName_thenReturnPaginatedStations",
+						responseFields(
+								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("The Station id."),
+								fieldWithPath("stationName").type(JsonFieldType.STRING).description("The Station name."),
+								fieldWithPath("stationType").type(JsonFieldType.STRING).description("The Station type, it can be \"CP (Comboios de Portugal)\" or \"Metro\"."),
+								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
+										"in HAL Format. Delivering every possible next action a client may perform.")
+						),
+						links(
+								linkWithRel("self").description("Reference to self.")
+						)
+				))
+				.when()
+				.port(port)
+				.queryParam("name", name)
+				.get("/stations/");
+
+
+		// then
+		response.then().statusCode(200);
+	}
+
+	@Test
+	public void givenStationNameDoesNotExist_whenListStationsWithName_thenReturnLink() {
+		// given
+		String name = "Invalid Station Name";
+		Optional<Station> optStation = Optional.empty();
+		when(stationRepository.findByNameIgnoreCase(name)).thenReturn(optStation);
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "givenStationNameDoesNotExist_whenListStationsWithName_thenReturnLink",
+						responseFields(
+								subsectionWithPath("._links").type(JsonFieldType.OBJECT).description("Link to list stations")
+						)
+				))
+				.when()
+				.port(port)
+				.queryParam("name", name)
+				.get("/stations/");
+
+
+		// then
+		response.then()
+				.statusCode(200);
+	}
 
 }
