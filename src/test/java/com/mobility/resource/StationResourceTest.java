@@ -23,6 +23,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.linkWithRel;
 import static org.springframework.restdocs.hypermedia.HypermediaDocumentation.links;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 
 public class StationResourceTest extends AbstractTestConfiguration {
 
@@ -128,6 +130,12 @@ public class StationResourceTest extends AbstractTestConfiguration {
 		// when
 		Response response = given(documentationSpec)
 				.filter(document(RESOURCE + "whenListAllStations_thenReturnPaginatedStations",
+						requestParameters(
+								parameterWithName("name").optional().description("The name of the station"),
+								parameterWithName("type").optional().description("The station type"),
+								parameterWithName("page").optional().description("The page to retrieve (default = 0)"),
+								parameterWithName("size").optional().description("The max number of elements of the page (default = 10)")
+						),
 						responseFields(
 								fieldWithPath("_embedded.stations[].stationId").type(JsonFieldType.NUMBER).description("The Station id."),
 								fieldWithPath("_embedded.stations[].stationName").type(JsonFieldType.STRING).description("The Station name."),

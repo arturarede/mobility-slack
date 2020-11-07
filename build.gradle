@@ -26,7 +26,7 @@ apply plugin: "org.hidetake.swagger.generator"
 apply plugin: "com.epages.restdocs-api-spec"
 
 group = 'com.mobility'
-version = '0.0.1-SNAPSHOT'
+version = '0.1.1'
 sourceCompatibility = 11
 targetCompatibility = 11
 
