@@ -1,5 +1,8 @@
 language: java
 
+before_install:
+  – ./gradlew build
+
 jdk:
   - openjdk11
 
