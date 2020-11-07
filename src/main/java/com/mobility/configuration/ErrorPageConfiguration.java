@@ -27,8 +27,6 @@ public class ErrorPageConfiguration {
     @Autowired
     private ErrorAttributes errorAttributes;
 
-    public ErrorPageConfiguration() {}
-
     @ResponseBody
     @ExceptionHandler({MobilityException.class})
     public ResponseEntity handleMobilityExceptions(final HttpServletRequest request, final MobilityException e) {
