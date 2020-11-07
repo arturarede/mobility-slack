@@ -5,7 +5,7 @@ import com.mobility.helpers.StationBuilder;
 import com.mobility.model.entity.Station;
 import com.mobility.model.entity.StationType;
 import com.mobility.repository.StationRepository;
-import com.mobility.service.exceptions.MobilityNotFoundException;
+import com.mobility.configuration.exceptions.MobilityNotFoundException;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;

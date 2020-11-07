@@ -1,4 +1,4 @@
-package com.mobility.service.exceptions;
+package com.mobility.configuration.exceptions;
 
 public abstract class MobilityException extends RuntimeException{
     private static final long serialVersionUID = 1L;

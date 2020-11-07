@@ -3,7 +3,7 @@ package com.mobility.service;
 import com.mobility.model.entity.Station;
 import com.mobility.model.entity.StationType;
 import com.mobility.repository.StationRepository;
-import com.mobility.service.exceptions.MobilityNotFoundException;
+import com.mobility.configuration.exceptions.MobilityNotFoundException;
 import com.mobility.service.strategy.StrategyFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
