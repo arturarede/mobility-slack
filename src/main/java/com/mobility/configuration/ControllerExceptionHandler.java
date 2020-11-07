@@ -4,8 +4,6 @@ import com.mobility.configuration.exceptions.ErrorMessage;
 import com.mobility.configuration.exceptions.MobilityBadRequestException;
 import com.mobility.configuration.exceptions.MobilityNotFoundException;
 import com.mobility.configuration.exceptions.MobilitySystemException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,8 +16,6 @@ import java.util.Date;
 
 @RestControllerAdvice
 public class ControllerExceptionHandler {
-
-    private static final Logger LOG = LoggerFactory.getLogger(ControllerExceptionHandler.class);
 
     @ExceptionHandler(value = {MobilityBadRequestException.class, MethodArgumentTypeMismatchException.class,
             MissingServletRequestParameterException.class})
