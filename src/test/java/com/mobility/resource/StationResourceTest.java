@@ -297,4 +297,165 @@ public class StationResourceTest extends AbstractTestConfiguration {
 				.statusCode(200);
 	}
 
+	@Test
+	public void whenListMetroStationsWithName_thenReturnStation() {
+		// given
+		String name = "stationMetro";
+
+		Station stationMetro = StationBuilder
+				.aMetroStation().but()
+				.withId(1)
+				.withName(name)
+				.build();
+
+		String type = StationType.METRO.name();
+
+		Optional<Station> optStation = Optional.of(stationMetro);
+		when(stationRepository.findByNameIgnoreCase(name)).thenReturn(optStation);
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "whenListMetroStationsWithName_thenReturnStation",
+						responseFields(
+								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("The Station id."),
+								fieldWithPath("stationName").type(JsonFieldType.STRING).description("The Station name."),
+								fieldWithPath("stationType").type(JsonFieldType.STRING).description("The Station type, it can be \"CP (Comboios de Portugal)\" or \"Metro\"."),
+								fieldWithPath("_links.self.href").type(JsonFieldType.STRING).description("HATEOAS Links " +
+										"in HAL Format. Delivering every possible next action a client may perform.")
+						),
+						links(
+								linkWithRel("self").description("Reference to self.")
+						)
+				))
+				.when()
+				.port(port)
+				.queryParam("name", name)
+				.queryParam("type", type)
+				.get("/stations/");
+
+
+		// then
+		response.then().statusCode(200);
+	}
+
+	@Test
+	public void whenListMetroStationsWithName_thenReturnLink() {
+		// given
+		String name = "stationMetro";
+
+		Station stationCp = StationBuilder
+				.aCpStation().but()
+				.withId(1)
+				.withMetroId(null)
+				.withName(name)
+				.build();
+
+		String type = StationType.METRO.name();
+
+		Optional<Station> optStation = Optional.of(stationCp);
+		when(stationRepository.findByNameIgnoreCase(name)).thenReturn(optStation);
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "whenListMetroStationsWithName_thenReturnLink",
+						responseFields(
+								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
+										"in HAL Format. Delivering every possible next action a client may perform.")
+						),
+						links(
+								linkWithRel("self").description("Reference to self.")
+						)
+				))
+				.when()
+				.port(port)
+				.queryParam("name", name)
+				.queryParam("type", type)
+				.get("/stations/");
+
+
+		// then
+		response.then().statusCode(200);
+	}
+
+	@Test
+	public void whenListCpStationsWithName_thenReturnStation() {
+		// given
+		String name = "stationCp";
+
+		Station stationCp = StationBuilder
+				.aCpStation().but()
+				.withId(1)
+				.withName(name)
+				.build();
+
+		String type = StationType.CP.name();
+
+		Optional<Station> optStation = Optional.of(stationCp);
+		when(stationRepository.findByNameIgnoreCase(name)).thenReturn(optStation);
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "whenListCpStationsWithName_thenReturnStation",
+						responseFields(
+								fieldWithPath("stationId").type(JsonFieldType.NUMBER).description("The Station id."),
+								fieldWithPath("stationName").type(JsonFieldType.STRING).description("The Station name."),
+								fieldWithPath("stationType").type(JsonFieldType.STRING).description("The Station type, it can be \"CP (Comboios de Portugal)\" or \"Metro\"."),
+								fieldWithPath("_links.self.href").type(JsonFieldType.STRING).description("HATEOAS Links " +
+										"in HAL Format. Delivering every possible next action a client may perform.")
+						),
+						links(
+								linkWithRel("self").description("Reference to self.")
+						)
+				))
+				.when()
+				.port(port)
+				.queryParam("name", name)
+				.queryParam("type", type)
+				.get("/stations/");
+
+
+		// then
+		response.then().statusCode(200);
+	}
+
+	@Test
+	public void whenListCpStationsWithName_thenReturnLink() {
+		// given
+		String name = "stationCp";
+
+		Station stationMetro = StationBuilder
+				.aMetroStation().but()
+				.withId(1)
+				.withIpId(null)
+				.withName(name)
+				.build();
+
+		String type = StationType.CP.name();
+
+		Optional<Station> optStation = Optional.of(stationMetro);
+		when(stationRepository.findByNameIgnoreCase(name)).thenReturn(optStation);
+
+		// when
+		Response response = given(documentationSpec)
+				.filter(document(RESOURCE + "whenListCpStationsWithName_thenReturnLink",
+						responseFields(
+								subsectionWithPath("_links").type(JsonFieldType.OBJECT).description("HATEOAS Links " +
+										"in HAL Format. Delivering every possible next action a client may perform.")
+						),
+						links(
+								linkWithRel("self").description("Reference to self.")
+						)
+				))
+				.when()
+				.port(port)
+				.queryParam("name", name)
+				.queryParam("type", type)
+				.get("/stations/");
+
+
+		// then
+		response.then().statusCode(200);
+	}
+
+
 }
