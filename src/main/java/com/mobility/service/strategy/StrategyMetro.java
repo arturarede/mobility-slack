@@ -1,4 +1,4 @@
-package com.mobility.service;
+package com.mobility.service.strategy;
 
 import com.mobility.model.entity.Station;
 import com.mobility.model.entity.StationType;
@@ -11,20 +11,20 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component
-public class StrategyCP implements Strategy {
+public class StrategyMetro implements Strategy {
 
     @Autowired
     StationRepository stationRepository;
 
     @Override
     public Page<Station> listStations(Pageable pageable) {
-        return stationRepository.findAllByIpIdNotNull(pageable);
+        return stationRepository.findAllByMetroIdNotNull(pageable);
     }
 
     @Override
     public Optional<Station> getStationByName(String name) {
         Optional<Station> station = stationRepository.findByNameIgnoreCase(name);
-        if (station.isPresent() && station.get().getIpId() == null) {
+        if (station.isPresent() && station.get().getMetroId() == null) {
             station = Optional.empty();
         }
         return station;
@@ -32,6 +32,6 @@ public class StrategyCP implements Strategy {
 
     @Override
     public StationType getStrategyName() {
-        return StationType.CP;
+        return StationType.METRO;
     }
 }

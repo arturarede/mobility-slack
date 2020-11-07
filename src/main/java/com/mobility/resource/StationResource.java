@@ -50,8 +50,8 @@ public class StationResource {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<StationDto> getStationById(@PathVariable("id") Integer id) {
-        StationDto stationDto = stationModelAssembler.toModel(stationService.getStationById(id));
+    public ResponseEntity<StationDto> getStationById(@PathVariable("id") Integer stationId) {
+        StationDto stationDto = stationModelAssembler.toModel(stationService.getStationById(stationId));
         return new ResponseEntity<>(stationDto, HttpStatus.OK);
     }
 }

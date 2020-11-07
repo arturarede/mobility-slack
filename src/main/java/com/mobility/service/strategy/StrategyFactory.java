@@ -1,4 +1,4 @@
-package com.mobility.service;
+package com.mobility.service.strategy;
 
 import com.mobility.model.entity.StationType;
 import org.springframework.beans.factory.annotation.Autowired;
