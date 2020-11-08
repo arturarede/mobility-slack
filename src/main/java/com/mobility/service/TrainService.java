@@ -56,7 +56,7 @@ public class TrainService {
                 .block();
 
         Collection<Train> trains = getTrains(response);
-        if(withDelay) {
+        if(Boolean.TRUE.equals(withDelay)) {
             trains = trains.stream()
                     .filter(train -> train.getDelay().compareTo(Duration.ofMinutes(0)) > 0)
                     .collect(Collectors.toList());
@@ -77,8 +77,7 @@ public class TrainService {
         }
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        String finalDate = departure.format(formatter) + "+" + arrival.format(formatter);
-        return finalDate;
+        return departure.format(formatter) + "+" + arrival.format(formatter);
     }
 
     @NotNull
