@@ -64,6 +64,7 @@ public class TrainService {
                         "not fulfill the request")))
                 .block();
 
+        System.out.println(response);
 
         return Collections.singletonList(train);
     }

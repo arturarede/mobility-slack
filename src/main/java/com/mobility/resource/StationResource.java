@@ -1,6 +1,6 @@
 package com.mobility.resource;
 
-import com.mobility.assembler.StationModelAssembler;
+import com.mobility.mapper.hateoas.StationModelAssembler;
 import com.mobility.model.entity.Station;
 import com.mobility.model.entity.StationType;
 import com.mobility.resource.dto.StationDto;

@@ -1,4 +1,4 @@
-package com.mobility.assembler;
+package com.mobility.mapper.hateoas;
 
 
 import com.mobility.model.entity.Train;

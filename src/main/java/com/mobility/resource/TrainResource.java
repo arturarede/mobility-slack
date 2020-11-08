@@ -1,6 +1,6 @@
 package com.mobility.resource;
 
-import com.mobility.assembler.TrainModelAssembler;
+import com.mobility.mapper.hateoas.TrainModelAssembler;
 import com.mobility.model.entity.Train;
 import com.mobility.resource.dto.TrainDto;
 import com.mobility.service.TrainService;
