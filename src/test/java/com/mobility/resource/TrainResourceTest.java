@@ -39,7 +39,7 @@ public class TrainResourceTest extends AbstractTestConfiguration {
     }
 
     @Test
-    public void firstTestHere() {
+    public void whenListAllTrains_thenReturnTrains() {
         // given
         Station station = StationBuilder
                 .aCpStation()
@@ -49,7 +49,7 @@ public class TrainResourceTest extends AbstractTestConfiguration {
 
         // when
         Response response = given(documentationSpec)
-                .filter(document(RESOURCE + "firstTestHere",
+                .filter(document(RESOURCE + "whenListAllTrains_thenReturnTrains",
                         requestParameters(
                                 parameterWithName("state").optional().description("If it is from (DEPARTURES/ARRIVALS)"),
                                 parameterWithName("date").optional().description("Date from when to start the search (dd-MM-yyyy HH:mm)"),
