@@ -1,0 +1,53 @@
+= Train Resource API =
+:docinfo: shared
+:doctype: article
+:toc: left
+:icons: font
+:source-highlighter: highlightjs
+:relfileprefix: ../
+:outfilesuffix: .html
+
+The Train Resource is where you can find detailed information about the trains.
+
+== Get All Trains
+
+=== Definition
+[caption=]
+.General
+[width="100%", cols="h,1"]
+|===
+|Methods |GET
+|Authentication | None
+|Authorization | None.
+|Status Codes |
+200 - In case all goes well you get all the stations
+
+500 - In case the request fails
+
+|===
+[caption=]
+.Request Parameters
+None.
+
+[caption=]
+.Header Parameters
+None.
+
+[caption=]
+.Response Fields
+include::{snippets}/trains/whenListAllTrains_thenReturnTrains/response-fields.adoc[]
+
+=== Example calls
+
+==== Success call
+[source,bash,indent=0, role="primary"]
+.Curl call
+----
+include::{snippets}/trains/whenListAllTrains_thenReturnTrains/curl-request.adoc[]
+----
+
+[source,http,indent=0, role="secondary"]
+.HTTP response body
+----
+include::{snippets}/trains/whenListAllTrains_thenReturnTrains/http-response.adoc[]
+----
