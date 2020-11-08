@@ -29,7 +29,7 @@ public class StationBuilder {
     public static StationBuilder aCpStation() {
         return StationBuilder
                 .aStation()
-                .withMetroId(DEFAULT_IP_ID);
+                .withIpId(DEFAULT_IP_ID);
     }
 
     public StationBuilder withId(Integer id) {

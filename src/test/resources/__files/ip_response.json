@@ -1,0 +1,31 @@
+{
+  "HorarioDetalhe": [
+    {
+      "ID": 15601,
+      "Nome": "SUBURB",
+      "HoraChegada": "2020-11-08 04:27:00",
+      "HoraPartida": "2020-11-08 04:27:00",
+      "Comboio": {
+        "ID": 15601,
+        "Nome": "SUBURB"
+      },
+      "EstacaoOrigem": {
+        "ID": 9438000,
+        "Nome": "AVEIRO"
+      },
+      "EstacaoDestino": {
+        "ID": 9439040,
+        "Nome": "GRANJA"
+      },
+      "Operador": {
+        "ID": 230,
+        "Nome": "CP PORTO"
+      },
+      "EstadoComboio": {
+        "ID": 43892,
+        "Nome": "Atrasado: 731 minutos",
+        "Descricao": "Atrasado: 731 minutos"
+      }
+    }
+  ]
+}
