@@ -23,8 +23,62 @@
       },
       "EstadoComboio": {
         "ID": 43892,
-        "Nome": "Atrasado: 731 minutos",
-        "Descricao": "Atrasado: 731 minutos"
+        "Nome": "Atrasado: 40 minutos",
+        "Descricao": "Atrasado: 40 minutos"
+      }
+    },
+    {
+      "ID": 523,
+      "Nome": "IC",
+      "HoraChegada": "2020-11-08 18:00:00",
+      "HoraPartida": "2020-11-08 18:02:00",
+      "Comboio": {
+        "ID": 523,
+        "Nome": "IC"
+      },
+      "EstacaoOrigem": {
+        "ID": 9430007,
+        "Nome": "LISBOA-APOLÓNIA"
+      },
+      "EstacaoDestino": {
+        "ID": 9402006,
+        "Nome": "PORTO-CAMPANHÃ"
+      },
+      "Operador": {
+        "ID": 260,
+        "Nome": "CP LONGO CURSO"
+      },
+      "EstadoComboio": {
+        "ID": 0,
+        "Nome": "À tabela",
+        "Descricao": "À tabela"
+      }
+    },
+    {
+      "ID": 4680,
+      "Nome": "REGIONAL",
+      "HoraChegada": "2020-11-08 19:49:00",
+      "HoraPartida": "2020-11-08 19:49:00",
+      "Comboio": {
+        "ID": 4680,
+        "Nome": "REGIONAL"
+      },
+      "EstacaoOrigem": {
+        "ID": 9438000,
+        "Nome": "AVEIRO"
+      },
+      "EstacaoDestino": {
+        "ID": 9441020,
+        "Nome": "COIMBRA"
+      },
+      "Operador": {
+        "ID": 270,
+        "Nome": "CP REGIONAL"
+      },
+      "EstadoComboio": {
+        "ID": 0,
+        "Nome": "À tabela",
+        "Descricao": "À tabela"
       }
     }
   ]
