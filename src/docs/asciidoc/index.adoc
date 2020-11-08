@@ -14,5 +14,5 @@ Description for Mobility Slack
 [width="100%, cols="2*2", options="header]
 |======
 |link:station{outfilesuffix}[Station Resource] |
-|link:trains{outfilesuffix}[Train Resource] |
+|link:train{outfilesuffix}[Train Resource] |
 |======
