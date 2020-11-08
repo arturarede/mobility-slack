@@ -1,6 +1,7 @@
 package com.mobility.resource;
 
 import com.mobility.mapper.hateoas.TrainModelAssembler;
+import com.mobility.model.entity.State;
 import com.mobility.model.entity.Train;
 import com.mobility.resource.dto.TrainDto;
 import com.mobility.service.TrainService;
@@ -26,13 +27,11 @@ public class TrainResource {
 
     @GetMapping(path = "")
     public ResponseEntity<CollectionModel<TrainDto>> listTrains(@PathVariable("station-id") Integer stationId,
-                                                                @RequestParam(required = false) String state,
-                                                                @RequestParam(required = false) Boolean delay,
-                                                                @RequestParam(required = false)
-                                                                    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
-                                                                            LocalDateTime date) {
+                                                                @RequestParam(required = false) State state,
+                                                                @RequestParam(required = false, defaultValue = "false") Boolean withDelay,
+                                                                @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm") LocalDateTime date) {
 
-        Collection<Train> trains = trainService.listTrains(stationId, state, delay, date);
+        Collection<Train> trains = trainService.listTrains(stationId, state, withDelay, date);
         CollectionModel<TrainDto> trainsCollectionModel = trainModelAssembler.toCollectionModel(trains, stationId);
         return new ResponseEntity<>(trainsCollectionModel, HttpStatus.OK);
     }
