@@ -51,9 +51,9 @@ public class TrainResourceTest extends AbstractTestConfiguration {
         Response response = given(documentationSpec)
                 .filter(document(RESOURCE + "firstTestHere",
                         requestParameters(
-                                parameterWithName("state").optional().description("If it is from DEPARTURES or ARRIVALS"),
-                                parameterWithName("date").optional().description("Date from when to start the search (default = now())"),
-                                parameterWithName("withDelay").optional().description("Only look for the trains with delay")
+                                parameterWithName("state").optional().description("If it is from (DEPARTURES/ARRIVALS)"),
+                                parameterWithName("date").optional().description("Date from when to start the search (dd-MM-yyyy HH:mm)"),
+                                parameterWithName("withDelay").optional().description("Only look for the trains with delay (Boolean)")
                         ),
                         responseFields(
                                 fieldWithPath("_embedded.trains[].id").type(JsonFieldType.NUMBER).description("The Train id."),
