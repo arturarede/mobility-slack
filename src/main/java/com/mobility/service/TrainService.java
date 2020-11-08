@@ -3,6 +3,7 @@ package com.mobility.service;
 import com.mobility.configuration.exceptions.MobilitySystemException;
 import com.mobility.model.entity.Station;
 import com.mobility.model.entity.Train;
+import com.mobility.model.entity.TrainType;
 import com.mobility.model.ip.TimetableCp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,9 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 @Service
 public class TrainService {
@@ -38,6 +40,14 @@ public class TrainService {
         if (date == null) {
 
         }
+        Train train = new Train();
+        train.setId(12321);
+        train.setFrom(station);
+        train.setTo(station);
+        train.setDeparture(LocalDateTime.now());
+        train.setArrival(LocalDateTime.now());
+        train.setTrainType(TrainType.ALFA);
+        train.setDelay(Duration.ofMinutes(10));
 
         //@TODO if date not provided assume date.now() until end of day
         //@TODO state = null just assume chegadas IN THEORY THIS MEANS ALL partidas e chegadas
@@ -54,7 +64,7 @@ public class TrainService {
                 .block();
 
 
-        return new ArrayList<>();
+        return Collections.singletonList(train);
     }
 
 }

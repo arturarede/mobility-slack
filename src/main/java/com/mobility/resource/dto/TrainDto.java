@@ -1,5 +1,6 @@
 package com.mobility.resource.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mobility.model.entity.TrainType;
@@ -8,8 +9,8 @@ import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -22,7 +23,15 @@ public class TrainDto extends RepresentationModel<TrainDto>  {
     private TrainType trainType;
     private Integer fromStationId;
     private Integer toStationId;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone="Europe/Lisbon")
     private LocalDateTime departure;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone="Europe/Lisbon")
     private LocalDateTime arrival;
-    private LocalTime delay;
+
+    @JsonFormat(pattern="mm")
+    private Duration delay;
+
+
 }

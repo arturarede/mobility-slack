@@ -2,8 +2,8 @@ package com.mobility.model.entity;
 
 import lombok.Data;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 @Data
 public class Train {
@@ -14,5 +14,5 @@ public class Train {
     private Station to;
     private LocalDateTime departure;
     private LocalDateTime arrival;
-    private LocalTime delay;
+    private Duration delay;
 }

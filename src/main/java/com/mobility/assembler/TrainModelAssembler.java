@@ -6,6 +6,7 @@ import com.mobility.resource.StationResource;
 import com.mobility.resource.TrainResource;
 import com.mobility.resource.dto.TrainDto;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.stereotype.Component;
 
@@ -36,5 +37,17 @@ public class TrainModelAssembler extends RepresentationModelAssemblerSupport<Tra
         trainDto.setTrainType(train.getTrainType());
         trainDto.setDelay(train.getDelay());
         return trainDto;
+    }
+
+    @NotNull
+    public CollectionModel<TrainDto> toCollectionModel(@NotNull Iterable<? extends Train> trains, Integer stationId)
+    {
+        CollectionModel<TrainDto> trainDtos = super.toCollectionModel(trains);
+        trainDtos.add(linkTo(methodOn(TrainResource.class)
+                .listTrains(stationId, null, null, null)).withSelfRel());
+        trainDtos.add(linkTo(methodOn(StationResource.class)
+                .listStations(null, null, null, null)).withRel("stations"));
+
+        return trainDtos;
     }
 }
