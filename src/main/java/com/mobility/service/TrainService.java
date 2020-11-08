@@ -1,10 +1,18 @@
 package com.mobility.service;
 
+import com.mobility.configuration.exceptions.MobilitySystemException;
 import com.mobility.model.entity.Station;
+import com.mobility.model.entity.Train;
+import com.mobility.model.ip.TimetableCp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Service
 public class TrainService {
@@ -16,16 +24,37 @@ public class TrainService {
     @Autowired
     StationService stationService;
 
-    public String listTrains(Integer stationId, String state) {
+    public Collection<Train> listTrains(Integer stationId, String state, Boolean delay, LocalDateTime date) {
         Station station = stationService.getStationById(stationId);
-        String responseJson = webClient.get()
-                .uri(state + "/" + station.getIpId() + "/2020-11-07T00:00:00+2020-11-08T23:59:59")
-                .exchange()
-                .block()
-                .bodyToMono(String.class)
+
+        if (state == null) {
+
+        }
+
+        if (delay == null) {
+
+        }
+
+        if (date == null) {
+
+        }
+
+        //@TODO if date not provided assume date.now() until end of day
+        //@TODO state = null just assume chegadas IN THEORY THIS MEANS ALL partidas e chegadas
+        System.out.println(state);
+        System.out.println(delay);
+        System.out.println(date);
+
+        TimetableCp response = webClient.get()
+                .uri(state + "/" + station.getIpId() + "/2020-11-08T00:00:00+2020-11-08T23:59:59")
+                .retrieve()
+                .bodyToMono(TimetableCp.class)
+                .onErrorResume(e -> Mono.error(new MobilitySystemException("The server could " +
+                        "not fulfill the request")))
                 .block();
-        System.out.println(responseJson);
-        return station.getIpId();
+
+
+        return new ArrayList<>();
     }
 
 }

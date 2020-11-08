@@ -1,8 +1,18 @@
 package com.mobility.resource;
 
+import com.mobility.assembler.TrainModelAssembler;
+import com.mobility.model.entity.Train;
+import com.mobility.resource.dto.TrainDto;
 import com.mobility.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/stations/{station-id}/trains")
@@ -11,9 +21,20 @@ public class TrainResource {
     @Autowired
     TrainService trainService;
 
+    @Autowired
+    private TrainModelAssembler trainModelAssembler;
+
     @GetMapping(path = "")
-    public String listTrains(@PathVariable("station-id") Integer stationId,
-                             @RequestParam(required = true) String state) {
-        return trainService.listTrains(stationId, state);
+    public ResponseEntity<String> listTrains(@PathVariable("station-id") Integer stationId,
+                                              @RequestParam(required = false) String state,
+                                              @RequestParam(required = false) Boolean delay,
+                                              @RequestParam(required = false) @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm") LocalDateTime date) {
+
+        Collection<Train> trains = trainService.listTrains(stationId, state, delay, date);
+        Collection<TrainDto> trainDtos = trains.stream()
+                .map(t -> trainModelAssembler.toModel(t))
+                .collect(Collectors.toList());
+
+        return new ResponseEntity<>("trainDtos", HttpStatus.OK);
     }
 }
