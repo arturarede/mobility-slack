@@ -35,7 +35,7 @@ public class TrainModelAssembler extends RepresentationModelAssemblerSupport<Tra
         trainDto.setDeparture(train.getDeparture());
         trainDto.setArrival(train.getArrival());
         trainDto.setTrainType(train.getTrainType());
-        trainDto.setDelay(train.getDelay());
+        trainDto.setDelay(train.getDelay().toMinutesPart() + "m");
         return trainDto;
     }
 

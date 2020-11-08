@@ -9,7 +9,6 @@ import lombok.EqualsAndHashCode;
 import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.core.Relation;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,15 +22,9 @@ public class TrainDto extends RepresentationModel<TrainDto>  {
     private TrainType trainType;
     private Integer fromStationId;
     private Integer toStationId;
-
     @JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone="Europe/Lisbon")
     private LocalDateTime departure;
-
     @JsonFormat(pattern="yyyy-MM-dd HH:mm", timezone="Europe/Lisbon")
     private LocalDateTime arrival;
-
-    @JsonFormat(pattern="mm")
-    private Duration delay;
-
-
+    private String delay;
 }

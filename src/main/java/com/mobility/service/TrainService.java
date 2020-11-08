@@ -40,6 +40,7 @@ public class TrainService {
         if (date == null) {
 
         }
+
         Train train = new Train();
         train.setId(12321);
         train.setFrom(station);
