@@ -49,6 +49,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+    testImplementation "com.github.tomakehurst:wiremock-jre8:2.27.2"
 
     asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor'
     swaggerUI 'org.webjars:swagger-ui:3.10.0'
