@@ -17,7 +17,7 @@ public abstract class IpMapper {
     StationRepository stationRepository;
 
     @Mapping(source = "id", target = "id")
-    @Mapping(target = "trainType", expression = "java(com.mobility.model.entity.TrainType.valueOfWithoutSpecial(trainCp.getInfoTrain().getName()))")
+    @Mapping(target = "trainType", expression = "java(com.mobility.model.entity.TrainType.valueOfDefault(trainCp.getInfoTrain().getName()))")
     @Mapping(source = "arrival", target = "arrival")
     @Mapping(source = "departure", target = "departure")
     @Mapping(target = "from", expression = "java(idToStation(trainCp.getFromStation().getId()))")
@@ -35,7 +35,7 @@ public abstract class IpMapper {
     }
 
     public Station idToStation(Integer id) {
-        return stationRepository.findByIpId(Integer.toString(id))
+        return stationRepository.findByIpId(id)
                 .orElse(new Station());
 
     }

@@ -17,6 +17,6 @@ public interface StationRepository extends MongoRepository<Station, String> {
 
     Page<Station> findAllByMetroIdNotNull(Pageable pageable);
 
-    Optional<Station> findByIpId(String ipId);
+    Optional<Station> findByIpId(Integer ipId);
 
 }
